@@ -58,7 +58,7 @@ pub fn deploy_extension() -> anyhow::Result<()> {
     // Example queries
     // app.query_base(BaseQueryMsg::Admin {})?;
 
-    // let app_config: ConfigResponse = app.query_app(TemplateQueryMsg::Config {})?;
+    // let app_config: ConfigResponse = app.query_app(AutocompounderQueryMsg::Config {})?;
 
     // TODO: Attach to an OS
 
