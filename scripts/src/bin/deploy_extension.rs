@@ -1,22 +1,9 @@
 use std::env;
 use std::sync::Arc;
 
-
-
 use boot_core::{DaemonOptionsBuilder, networks};
-use boot_core::prelude::{instantiate_daemon_env};
-
-
 use boot_core::networks::NetworkInfo;
-
-
-
-
-// use template_app::msg::ConfigResponse;
-
-
-
-
+use boot_core::prelude::instantiate_daemon_env;
 
 const NETWORK: NetworkInfo = networks::UNI_5;
 
