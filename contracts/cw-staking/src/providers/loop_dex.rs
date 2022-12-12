@@ -1,12 +1,11 @@
 use crate::{staking_trait::Identify, error::StakingError, CwStakingProvider};
 
 use cosmwasm_std::{
-    to_binary, wasm_execute, Addr, Coin, CosmosMsg, Decimal, Deps, QueryRequest, StdResult,
-    Uint128, WasmMsg, WasmQuery,
+    to_binary, Addr, Coin, CosmosMsg, Deps, StdResult, WasmMsg,
 };
-use cw20::Cw20ExecuteMsg;
+
 use cw_asset::{Asset, AssetInfo, AssetInfoBase};
-use terraswap::pair::{PoolResponse, SimulationResponse};
+
 pub const LOOP: &str = "loop";
 pub struct Loop {}
 
@@ -20,15 +19,15 @@ impl Identify for Loop {
 }
 
 impl CwStakingProvider for Loop {
-    fn stake(&self, deps: Deps, staking_address: Addr, asset: Asset) -> Result<Vec<CosmosMsg>, StakingError> {
+    fn stake(&self, _deps: Deps, _staking_address: Addr, _asset: Asset) -> Result<Vec<CosmosMsg>, StakingError> {
         unimplemented!()
     }
 
-    fn unstake(&self, deps: Deps, staking_address: Addr, amount: Asset) -> Result<Vec<CosmosMsg>, StakingError> {
+    fn unstake(&self, _deps: Deps, _staking_address: Addr, _amount: Asset) -> Result<Vec<CosmosMsg>, StakingError> {
         unimplemented!()
     }
 
-    fn claim(&self, deps: Deps, staking_address: Addr) -> Result<Vec<CosmosMsg>, StakingError> {
+    fn claim(&self, _deps: Deps, _staking_address: Addr) -> Result<Vec<CosmosMsg>, StakingError> {
         unimplemented!()
     }
 }

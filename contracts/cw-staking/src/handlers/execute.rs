@@ -3,11 +3,11 @@ use abstract_sdk::os::ibc_client::CallbackInfo;
 use abstract_sdk::base::features::AbstractNameService;
 use abstract_sdk::{IbcInterface, Resolve};
 use abstract_sdk::feature_objects::AnsHost;
-use abstract_sdk::os::objects::AnsAsset;
-use crate::{contract, provider_resolver, LocalCwStaking, CwStakingProvider};
+
+use cw_4t2::cw_staking::{CwStakingAction, CwStakingRequestMsg, IBC_STAKING_PROVIDER_ID, ProviderName};
+use crate::{provider_resolver, LocalCwStaking};
 use crate::contract::{CwStakingExtension, CwStakingResult};
-use crate::error::StakingError;
-use crate::cw_staking::{CwStakingAction, CwStakingRequestMsg, IBC_STAKING_PROVIDER_ID, LpToken, ProviderName};
+
 use crate::staking_trait::Identify;
 
 const ACTION_RETRIES: u8 = 3;

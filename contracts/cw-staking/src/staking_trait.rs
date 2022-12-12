@@ -1,7 +1,7 @@
 use abstract_sdk::feature_objects::AnsHost;
 use abstract_sdk::os::objects::{AssetEntry, ContractEntry};
-use cosmwasm_std::{Addr, CosmosMsg, Decimal, Deps, StdResult, Uint128};
-use cw_asset::{Asset, AssetInfo};
+use cosmwasm_std::{Addr, CosmosMsg, Deps, StdResult, Uint128};
+use cw_asset::{Asset};
 use crate::commands::assets_from_lp_token_name;
 
 use crate::error::StakingError;
@@ -32,7 +32,7 @@ pub trait CwStakingProvider: Identify {
     ) -> StdResult<Addr> {
         let lp_token_assets: Vec<AssetEntry> = assets_from_lp_token_name(lp_token_name);
         // Assets by reference
-        let mut lp_token_assets = lp_token_assets.iter().map(|a| a).collect();
+        let mut lp_token_assets = lp_token_assets.iter().collect();
 
         let provider_pair = self.provider_entry(&mut lp_token_assets);
         ans_host.query_contract(&deps.querier, &provider_pair)

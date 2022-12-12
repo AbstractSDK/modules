@@ -1,14 +1,14 @@
 use abstract_sdk::base::features::AbstractNameService;
-use abstract_sdk::os::objects::AnsAsset;
+
 use abstract_sdk::Execution;
-use cosmwasm_std::{CosmosMsg, Decimal, Deps, DepsMut, ReplyOn, SubMsg};
-use cw_asset::Asset;
+use cosmwasm_std::{CosmosMsg, Deps, DepsMut, ReplyOn, SubMsg};
+
 
 use crate::{error::StakingError, CwStakingProvider};
 use abstract_sdk::os::{
-    objects::{AssetEntry, UncheckedContractEntry},
+    objects::{AssetEntry},
 };
-use crate::cw_staking::{CwStakingAction, LpToken};
+use cw_4t2::cw_staking::{CwStakingAction, LpToken};
 
 pub const STAKE_REPLY_ID: u64 = 8542;
 pub const UNSTAKE_REPLY_ID: u64 = 8543;
@@ -122,6 +122,5 @@ const LP_TOKEN_ASSET_SEPARATOR: char = '_';
 pub fn assets_from_lp_token_name(info: &str) -> Vec<AssetEntry> {
     let words = info.split(LP_TOKEN_PROVIDER_SEPARATOR).collect::<Vec<&str>>();
     let _provider = words[0];
-    let assets = words[1].split(LP_TOKEN_ASSET_SEPARATOR).collect::<Vec<&str>>();
-    assets.into_iter().map(AssetEntry::from).collect()
+    words[1].split(LP_TOKEN_ASSET_SEPARATOR).map(AssetEntry::from).collect()
 }

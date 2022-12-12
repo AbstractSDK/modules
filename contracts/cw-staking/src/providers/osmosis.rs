@@ -1,13 +1,11 @@
 use crate::{
-    staking_trait::{Fee, FeeOnInput, Identify, Return, Spread},
-    error::StakingError,
-    CwStakingProvider,
+    staking_trait::{Identify},
 };
 
 use cosmwasm_std::{
-    Addr, Coin, CosmosMsg, Decimal, Decimal256, Deps, StdError, StdResult, Uint128, Uint256,
+    Addr,
 };
-use cw_asset::{Asset, AssetInfo};
+
 #[cfg(feature = "osmosis")]
 use osmosis_std::types::osmosis::gamm::v1beta1::{
     MsgExitPool, MsgJoinPool, MsgSwapExactAmountIn, QuerySwapExactAmountInRequest,

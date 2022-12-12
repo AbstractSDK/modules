@@ -4,8 +4,6 @@ pub(crate) mod staking_trait;
 pub mod error;
 mod providers;
 
-// TODO: move elsewhere
-pub mod cw_staking;
 mod handlers;
 mod provider_resolver;
 

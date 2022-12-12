@@ -1,12 +1,12 @@
 use crate::{staking_trait::Identify, error::StakingError, CwStakingProvider};
 
 use cosmwasm_std::{
-    to_binary, wasm_execute, Addr, Coin, CosmosMsg, Decimal, Deps, Fraction, QueryRequest,
-    StdResult, Uint128, WasmMsg, WasmQuery,
+    to_binary, Addr, Coin, CosmosMsg, Deps,
+    StdResult, WasmMsg,
 };
-use cw20_junoswap::{Cw20ExecuteMsg, Denom};
-use cw_asset::{Asset, AssetInfo, AssetInfoBase};
-use wasmswap::msg::*;
+use cw20_junoswap::{Denom};
+use cw_asset::{Asset, AssetInfo};
+
 pub const JUNOSWAP: &str = "junoswap";
 // Source https://github.com/wasmswap/wasmswap-contracts
 pub struct JunoSwap {}
@@ -21,15 +21,15 @@ impl Identify for JunoSwap {
 }
 
 impl CwStakingProvider for JunoSwap {
-    fn stake(&self, deps: Deps, staking_address: Addr, asset: Asset) -> Result<Vec<CosmosMsg>, StakingError> {
+    fn stake(&self, _deps: Deps, _staking_address: Addr, _asset: Asset) -> Result<Vec<CosmosMsg>, StakingError> {
         unimplemented!()
     }
 
-    fn unstake(&self, deps: Deps, staking_address: Addr, amount: Asset) -> Result<Vec<CosmosMsg>, StakingError> {
+    fn unstake(&self, _deps: Deps, _staking_address: Addr, _amount: Asset) -> Result<Vec<CosmosMsg>, StakingError> {
         unimplemented!()
     }
 
-    fn claim(&self, deps: Deps, staking_address: Addr) -> Result<Vec<CosmosMsg>, StakingError> {
+    fn claim(&self, _deps: Deps, _staking_address: Addr) -> Result<Vec<CosmosMsg>, StakingError> {
         unimplemented!()
     }
 }
