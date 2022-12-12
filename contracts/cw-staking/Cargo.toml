@@ -37,7 +37,7 @@ serde = { workspace = true }
 abstract-sdk = { workspace = true }
 abstract-extension = { workspace = true }
 cw-asset = "2.4.0"
-cw-4t2 = { path = "../../packages/cw-4t2" }
+forty-two = { path = "../../packages/forty-two" }
 
 # Juno dexes
 cw20_junoswap = {package = "cw20", version = "0.10.0", optional = true}

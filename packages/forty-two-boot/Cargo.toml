@@ -1,5 +1,5 @@
 [package]
-name = "cw-4t2-boot"
+name = "forty-two-boot"
 version = "1.1.1"
 edition = "2021"
 #workspace.version = true
@@ -16,5 +16,5 @@ abstract-boot = "0.2.0-beta.7"
 serde_json = "1.0.79"
 serde = { version = "1.0.103", default-features = false, features = ["derive"] }
 cw-staking = { package = "cw-staking", path = "../../contracts/cw-staking" }
-cw-4t2 = { path = "../cw-4t2" }
+forty-two = { path = "../forty-two" }
 abstract-os = { workspace = true}

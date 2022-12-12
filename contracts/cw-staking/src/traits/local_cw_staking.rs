@@ -6,7 +6,7 @@ use cosmwasm_std::{CosmosMsg, Deps, DepsMut, ReplyOn, SubMsg};
 
 use crate::{error::StakingError};
 use abstract_sdk::os::objects::AssetEntry;
-use cw_4t2::cw_staking::{CwStakingAction, LpToken};
+use forty_two::cw_staking::{CwStakingAction, LpToken};
 use crate::traits::cw_staking_provider::CwStakingProvider;
 
 pub const STAKE_REPLY_ID: u64 = 8542;

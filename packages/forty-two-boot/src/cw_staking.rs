@@ -5,7 +5,7 @@ use boot_core::{BootEnvironment, Contract, IndexResponse, TxResponse};
 
 use cosmwasm_std::Empty;
 use abstract_os::extension;
-use cw_4t2::cw_staking::{CwStakingQueryMsg, CwStakingRequestMsg};
+use forty_two::cw_staking::{CwStakingQueryMsg, CwStakingRequestMsg};
 
 type ExtensionExecuteMsg = extension::ExecuteMsg<CwStakingRequestMsg>;
 type ExtensionQueryMsg = extension::QueryMsg<CwStakingQueryMsg>;

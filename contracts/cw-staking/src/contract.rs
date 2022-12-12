@@ -4,7 +4,7 @@ use abstract_extension::{export_endpoints, ExtensionContract};
 use cosmwasm_std::{
     Empty, Response,
 };
-use cw_4t2::cw_staking::{CwStakingQueryMsg, CwStakingRequestMsg, CW_STAKING};
+use forty_two::cw_staking::{CwStakingQueryMsg, CwStakingRequestMsg, CW_STAKING};
 
 use crate::{error::StakingError, handlers};
 

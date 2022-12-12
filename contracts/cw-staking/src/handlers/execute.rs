@@ -4,7 +4,7 @@ use abstract_sdk::base::features::AbstractNameService;
 use abstract_sdk::{IbcInterface, Resolve};
 use abstract_sdk::feature_objects::AnsHost;
 
-use cw_4t2::cw_staking::{CwStakingAction, CwStakingRequestMsg, IBC_STAKING_PROVIDER_ID, ProviderName};
+use forty_two::cw_staking::{CwStakingAction, CwStakingRequestMsg, IBC_STAKING_PROVIDER_ID, ProviderName};
 use crate::{LocalCwStaking};
 use crate::contract::{CwStakingExtension, CwStakingResult};
 use crate::providers::resolver;

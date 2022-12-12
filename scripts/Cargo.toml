@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-cw-4t2-boot = { path = "../packages/cw-4t2-boot" }
+forty-two-boot = { path = "../packages/forty-two-boot" }
 boot-core = "0.2.0"
 abstract-boot = "0.2.0-beta.7"
 log = "0.4.14"
@@ -19,5 +19,5 @@ env_logger = "0.10.0"
 semver = { version = "1.0.13", default-features = false }
 cw-staking = { package = "cw-staking", path = "../contracts/cw-staking" }
 abstract-os = { workspace = true }
-cw-4t2 = { path = "../packages/cw-4t2" }
+forty-two = { path = "../packages/forty-two" }
 tokio = { version = "1.4", features = ["full"] }
