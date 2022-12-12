@@ -23,7 +23,7 @@ const NETWORK: NetworkInfo = networks::UNI_5;
 // To deploy the app we need to get the memory and then register it
 // We can then deploy a test OS that uses that new app
 
-const MODULE_VERSION: &str = env!("CARGO_PKG_VERSION");
+const _MODULE_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 pub fn deploy_extension() -> anyhow::Result<()> {
     let rt = Arc::new(tokio::runtime::Runtime::new().unwrap());

@@ -1,22 +1,24 @@
-use crate::{staking_trait::Identify, error::StakingError, CwStakingProvider};
 
 use cosmwasm_std::{
-    to_binary, Addr, Coin, CosmosMsg, Deps,
-    StdResult, WasmMsg,
+    Addr, Coin, CosmosMsg, Deps, StdResult,
+    to_binary, WasmMsg,
 };
-use cw20_junoswap::{Denom};
+use cw20_junoswap::Denom;
 use cw_asset::{Asset, AssetInfo};
+use crate::error::StakingError;
+use crate::traits::cw_staking_provider::CwStakingProvider;
+use crate::traits::identify::Identify;
 
 pub const JUNOSWAP: &str = "junoswap";
 // Source https://github.com/wasmswap/wasmswap-contracts
 pub struct JunoSwap {}
 
 impl Identify for JunoSwap {
-    fn name(&self) -> &'static str {
-        JUNOSWAP
-    }
     fn over_ibc(&self) -> bool {
         false
+    }
+    fn name(&self) -> &'static str {
+        JUNOSWAP
     }
 }
 
@@ -34,7 +36,7 @@ impl CwStakingProvider for JunoSwap {
     }
 }
 
-fn denom_and_asset_match(denom: &Denom, asset: &AssetInfo) -> Result<bool, StakingError> {
+fn _denom_and_asset_match(denom: &Denom, asset: &AssetInfo) -> Result<bool, StakingError> {
     match denom {
         Denom::Native(denom_name) => match asset {
             cw_asset::AssetInfoBase::Native(asset_name) => Ok(denom_name == asset_name),
@@ -51,7 +53,7 @@ fn denom_and_asset_match(denom: &Denom, asset: &AssetInfo) -> Result<bool, Staki
     }
 }
 
-fn cw_approve_msgs(assets: &[Asset], spender: &Addr) -> StdResult<Vec<CosmosMsg>> {
+fn _cw_approve_msgs(assets: &[Asset], spender: &Addr) -> StdResult<Vec<CosmosMsg>> {
     let mut msgs = vec![];
     for asset in assets {
         if let AssetInfo::Cw20(addr) = &asset.info {
@@ -70,7 +72,7 @@ fn cw_approve_msgs(assets: &[Asset], spender: &Addr) -> StdResult<Vec<CosmosMsg>
     Ok(msgs)
 }
 
-fn coins_in_assets(assets: &[Asset]) -> Vec<Coin> {
+fn _coins_in_assets(assets: &[Asset]) -> Vec<Coin> {
     let mut coins = vec![];
     for asset in assets {
         if let AssetInfo::Native(denom) = &asset.info {

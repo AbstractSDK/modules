@@ -1,14 +1,14 @@
-pub(crate) mod commands;
 pub mod contract;
-pub(crate) mod staking_trait;
 pub mod error;
 mod providers;
 
 mod handlers;
-mod provider_resolver;
+mod traits;
 
-pub use commands::LocalCwStaking;
-pub use staking_trait::CwStakingProvider;
+use traits::*;
+
+pub use local_cw_staking::LocalCwStaking;
+pub use cw_staking_provider::CwStakingProvider;
 
 #[cfg(any(feature = "juno", feature = "osmosis"))]
 pub mod host_exchange {

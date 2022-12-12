@@ -1,10 +1,5 @@
-use crate::{
-    staking_trait::{Identify},
-};
+use cosmwasm_std::{Addr};
 
-use cosmwasm_std::{
-    Addr,
-};
 
 #[cfg(feature = "osmosis")]
 use osmosis_std::types::osmosis::gamm::v1beta1::{
@@ -16,6 +11,9 @@ use osmosis_std::types::{
     cosmos::base::v1beta1::Coin as OsmoCoin,
     osmosis::gamm::v1beta1::{Pool, QueryPoolRequest},
 };
+
+
+use crate::traits::identify::Identify;
 
 pub const OSMOSIS: &str = "osmosis";
 pub struct Osmosis {

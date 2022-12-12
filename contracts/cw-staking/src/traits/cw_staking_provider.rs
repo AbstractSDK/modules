@@ -1,20 +1,10 @@
 use abstract_sdk::feature_objects::AnsHost;
 use abstract_sdk::os::objects::{AssetEntry, ContractEntry};
-use cosmwasm_std::{Addr, CosmosMsg, Deps, StdResult, Uint128};
-use cw_asset::{Asset};
-use crate::commands::assets_from_lp_token_name;
+use cosmwasm_std::{Addr, CosmosMsg, Deps, StdResult};
+use cw_asset::Asset;
 
 use crate::error::StakingError;
-
-pub type Return = Uint128;
-pub type Spread = Uint128;
-pub type Fee = Uint128;
-pub type FeeOnInput = bool;
-
-pub trait Identify {
-    fn over_ibc(&self) -> bool;
-    fn name(&self) -> &'static str;
-}
+use crate::traits::identify::Identify;
 
 /// Trait that defines the interface for staking providers
 pub trait CwStakingProvider: Identify {
@@ -71,4 +61,19 @@ pub trait CwStakingProvider: Identify {
         deps: Deps,
         staking_address: Addr,
     ) -> Result<Vec<CosmosMsg>, StakingError>;
+}
+
+
+// TODO: move these consts
+const LP_TOKEN_PROVIDER_SEPARATOR: char = ':';
+const LP_TOKEN_ASSET_SEPARATOR: char = '_';
+
+
+/// Parses the lp token name and returns the assets that make it up
+/// The format is: <provider>:<asset1>_<asset2>
+/// @todo: move this to abstract
+pub fn assets_from_lp_token_name(info: &str) -> Vec<AssetEntry> {
+    let words = info.split(LP_TOKEN_PROVIDER_SEPARATOR).collect::<Vec<&str>>();
+    let _provider = words[0];
+    words[1].split(LP_TOKEN_ASSET_SEPARATOR).map(AssetEntry::from).collect()
 }

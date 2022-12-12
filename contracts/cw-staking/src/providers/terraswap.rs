@@ -12,7 +12,7 @@ use cosmwasm_std::{
 use cw20::Cw20ExecuteMsg;
 use cw_asset::{Asset, AssetInfo, AssetInfoBase};
 use terraswap::pair::{PoolResponse, SimulationResponse};
-use crate::staking_trait::Identify;
+use crate::traits::identify::Identify;
 
 pub const TERRASWAP: &str = "terraswap";
 pub struct Terraswap {}
@@ -40,7 +40,7 @@ impl CwStakingProvider for Terraswap {
     }
 }
 
-fn cw_asset_to_terraswap(asset: &Asset) -> Result<terraswap::asset::Asset, StakingError> {
+fn _cw_asset_to_terraswap(asset: &Asset) -> Result<terraswap::asset::Asset, StakingError> {
     match &asset.info {
         AssetInfoBase::Native(denom) => Ok(terraswap::asset::Asset {
             amount: asset.amount,
@@ -58,7 +58,7 @@ fn cw_asset_to_terraswap(asset: &Asset) -> Result<terraswap::asset::Asset, Staki
     }
 }
 
-fn cw_approve_msgs(assets: &[Asset], spender: &Addr) -> StdResult<Vec<CosmosMsg>> {
+fn _cw_approve_msgs(assets: &[Asset], spender: &Addr) -> StdResult<Vec<CosmosMsg>> {
     let mut msgs = vec![];
     for asset in assets {
         if let AssetInfo::Cw20(addr) = &asset.info {
@@ -77,7 +77,7 @@ fn cw_approve_msgs(assets: &[Asset], spender: &Addr) -> StdResult<Vec<CosmosMsg>
     Ok(msgs)
 }
 
-fn coins_in_assets(assets: &[Asset]) -> Vec<Coin> {
+fn _coins_in_assets(assets: &[Asset]) -> Vec<Coin> {
     let mut coins = vec![];
     for asset in assets {
         if let AssetInfo::Native(denom) = &asset.info {

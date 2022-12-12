@@ -1,14 +1,13 @@
-use cosmwasm_std::{Coin, Deps, DepsMut, Env, MessageInfo, Response, StdError, StdResult, to_binary};
+use cosmwasm_std::{Coin, Deps, DepsMut, Env, MessageInfo, Response, StdResult, to_binary};
 use abstract_sdk::os::ibc_client::CallbackInfo;
 use abstract_sdk::base::features::AbstractNameService;
 use abstract_sdk::{IbcInterface, Resolve};
 use abstract_sdk::feature_objects::AnsHost;
 
 use cw_4t2::cw_staking::{CwStakingAction, CwStakingRequestMsg, IBC_STAKING_PROVIDER_ID, ProviderName};
-use crate::{provider_resolver, LocalCwStaking};
+use crate::{LocalCwStaking};
 use crate::contract::{CwStakingExtension, CwStakingResult};
-
-use crate::staking_trait::Identify;
+use crate::providers::resolver;
 
 const ACTION_RETRIES: u8 = 3;
 
@@ -23,9 +22,9 @@ pub fn execute_handler(
         provider: provider_name,
         action,
     } = msg;
-    let exchange = provider_resolver::identify_provider(&provider_name)?;
-    // if exchange is on an app-chain, execute the action on the app-chain
-    if exchange.over_ibc() {
+    let provider = resolver::resolve_provider_by_name(&provider_name)?;
+    // if provider is on an app-chain, execute the action on the app-chain
+    if provider.over_ibc() {
         handle_ibc_request(&deps, info, &extension, provider_name, &action)
     } else {
         // the action can be executed on the local chain
@@ -40,12 +39,12 @@ fn handle_local_request(
     _info: MessageInfo,
     extension: CwStakingExtension,
     action: CwStakingAction,
-    exchange: String,
+    provider: String,
 ) -> CwStakingResult {
-    let exchange = provider_resolver::resolve_local_provider(&exchange)?;
+    let provider = resolver::resolve_local_provider(&provider)?;
     Ok(
         Response::new()
-            .add_submessage(extension.resolve_staking_action(deps, action, exchange, false)?),
+            .add_submessage(extension.resolve_staking_action(deps, action, provider, false)?),
     )
 }
 
@@ -98,6 +97,5 @@ fn resolve_assets_to_transfer(
         CwStakingAction::Unstake { .. } => Ok(vec![]),
         // No assets to transfer
         CwStakingAction::Claim { .. } => Ok(vec![]),
-        _ => Err(StdError::generic_err("Unsupported action")),
     }
 }

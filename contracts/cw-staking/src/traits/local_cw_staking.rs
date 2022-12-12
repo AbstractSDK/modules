@@ -4,11 +4,10 @@ use abstract_sdk::Execution;
 use cosmwasm_std::{CosmosMsg, Deps, DepsMut, ReplyOn, SubMsg};
 
 
-use crate::{error::StakingError, CwStakingProvider};
-use abstract_sdk::os::{
-    objects::{AssetEntry},
-};
+use crate::{error::StakingError};
+use abstract_sdk::os::objects::AssetEntry;
 use cw_4t2::cw_staking::{CwStakingAction, LpToken};
+use crate::traits::cw_staking_provider::CwStakingProvider;
 
 pub const STAKE_REPLY_ID: u64 = 8542;
 pub const UNSTAKE_REPLY_ID: u64 = 8543;
@@ -110,17 +109,4 @@ pub trait LocalCwStaking: AbstractNameService + Execution {
 
         provider.claim(deps, staking_address)
     }
-}
-
-// TODO: move these consts
-const LP_TOKEN_PROVIDER_SEPARATOR: char = ':';
-const LP_TOKEN_ASSET_SEPARATOR: char = '_';
-
-/// Parses the lp token name and returns the assets that make it up
-/// The format is: <provider>:<asset1>_<asset2>
-/// @todo: move this to abstract
-pub fn assets_from_lp_token_name(info: &str) -> Vec<AssetEntry> {
-    let words = info.split(LP_TOKEN_PROVIDER_SEPARATOR).collect::<Vec<&str>>();
-    let _provider = words[0];
-    words[1].split(LP_TOKEN_ASSET_SEPARATOR).map(AssetEntry::from).collect()
 }

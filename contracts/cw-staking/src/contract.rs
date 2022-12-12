@@ -1,7 +1,4 @@
 use abstract_extension::{export_endpoints, ExtensionContract};
-use abstract_sdk::{
-    base::endpoints::{ExecuteEndpoint, InstantiateEndpoint, QueryEndpoint},
-};
 
 
 use cosmwasm_std::{

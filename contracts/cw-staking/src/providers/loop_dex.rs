@@ -1,10 +1,12 @@
-use crate::{staking_trait::Identify, error::StakingError, CwStakingProvider};
 
 use cosmwasm_std::{
-    to_binary, Addr, Coin, CosmosMsg, Deps, StdResult, WasmMsg,
+    Addr, Coin, CosmosMsg, Deps, StdResult, to_binary, WasmMsg,
 };
 
 use cw_asset::{Asset, AssetInfo, AssetInfoBase};
+use crate::error::StakingError;
+use crate::traits::cw_staking_provider::CwStakingProvider;
+use crate::traits::identify::Identify;
 
 pub const LOOP: &str = "loop";
 pub struct Loop {}
@@ -32,7 +34,7 @@ impl CwStakingProvider for Loop {
     }
 }
 
-fn cw_asset_to_terraswap(asset: &Asset) -> Result<terraswap::asset::Asset, StakingError> {
+fn _cw_asset_to_terraswap(asset: &Asset) -> Result<terraswap::asset::Asset, StakingError> {
     match &asset.info {
         AssetInfoBase::Native(denom) => Ok(terraswap::asset::Asset {
             amount: asset.amount,
@@ -50,7 +52,7 @@ fn cw_asset_to_terraswap(asset: &Asset) -> Result<terraswap::asset::Asset, Staki
     }
 }
 
-fn cw_approve_msgs(assets: &[Asset], spender: &Addr) -> StdResult<Vec<CosmosMsg>> {
+fn _cw_approve_msgs(assets: &[Asset], spender: &Addr) -> StdResult<Vec<CosmosMsg>> {
     let mut msgs = vec![];
     for asset in assets {
         if let AssetInfo::Cw20(addr) = &asset.info {
@@ -69,7 +71,7 @@ fn cw_approve_msgs(assets: &[Asset], spender: &Addr) -> StdResult<Vec<CosmosMsg>
     Ok(msgs)
 }
 
-fn coins_in_assets(assets: &[Asset]) -> Vec<Coin> {
+fn _coins_in_assets(assets: &[Asset]) -> Vec<Coin> {
     let mut coins = vec![];
     for asset in assets {
         if let AssetInfo::Native(denom) = &asset.info {
