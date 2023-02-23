@@ -1,8 +1,6 @@
 [workspace]
 members = [
-  "contracts/*",
-  "packages/*",
-  "scripts",
+  "modules/*",
 ]
 
 [workspace.package]
@@ -14,24 +12,22 @@ exclude = [
   # Those files are rust-optimizer artifacts. You might want to commit them for convenience but they should not be part of the source code publication.
   "contract.wasm",
   "hash.txt",
+  "cw-croncat"
 ]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 # Keep as is until TendermintStake updates.
 [workspace.dependencies]
-abstract-sdk = "0.2.0-beta.7"
-abstract-extension = "0.2.0-beta.7"
-abstract-app = "0.2.0-beta.7"
-abstract-os = "0.2.0-beta.7"
+abstract-sdk = "0.11.0"
+abstract-api = "0.11.0"
+abstract-app = "0.11.0"
+abstract-os = "0.11.0"
 cosmwasm-std = { version = "1.1" }
-cosmwasm-schema = { version = "1.1" }
-cw-asset = { version = "2.2" }
+cosmwasm-schema = { version = "1.2.1" }
+cw-asset = { version = "3.0.0" }
 schemars = "0.8"
 serde = { version = "1.0", default-features = false, features = ["derive"] }
 thiserror = { version = "1.0" }
-cw-storage-plus = "0.16.0"
-cw-controllers = "0.16.0"
-
-[workspace.dev-dependencies]
-cosmwasm-schema = { version = "1.1" }
+cw-storage-plus = "1.0.1"
+cw-controllers = "1.0.1"

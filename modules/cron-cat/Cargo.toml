@@ -1,0 +1,35 @@
+[package]
+name = "cron-cat"
+version = {workspace = true}
+authors = {workspace = true}
+edition = {workspace = true}
+
+exclude = [
+  "contract.wasm",
+  "hash.txt",
+]
+
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+library = []
+backtraces = ["cosmwasm-std/backtraces"]
+
+[dependencies]
+cosmwasm-std = {workspace = true}
+thiserror = {workspace = true}
+abstract-os = {workspace = true}
+abstract-sdk = { workspace = true }
+abstract-app = { workspace = true }
+
+croncat-sdk-core = "0.1.1"
+croncat-sdk-tasks = "0.1.1"
+croncat-sdk-agents= "0.1.1"
+croncat-sdk-manager= "0.1.1"
+croncat-sdk-factory= "0.1.1"
+# croncat-agents = {git = "https://github.com/CronCats/cw-croncat/" }
+# croncat-factory = {git = "https://github.com/CronCats/cw-croncat/" }
+# croncat-manager = {git = "https://github.com/CronCats/cw-croncat/" }
+# croncat-tasks = {git = "https://github.com/CronCats/cw-croncat/" }
